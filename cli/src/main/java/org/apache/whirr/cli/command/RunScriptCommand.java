@@ -126,6 +126,17 @@ public class RunScriptCommand extends AbstractClusterCommand {
       clusterSpec, condition, execFile(fileName)));
   }
 
+  //run input script directly
+  public int runScript(InputStream in, PrintStream out, PrintStream err,
+                 ClusterSpec clusterSpec, String[] instances, String[] roles,
+                 String script) throws Exception {
+    ClusterController controller = createClusterController(clusterSpec.getServiceName());
+    Predicate<NodeMetadata> condition = buildFilterPredicate(instances, roles, clusterSpec);
+
+    return handleScriptOutput(out, err, controller.runScriptOnNodesMatching(
+      clusterSpec, condition, exec(script)));
+  }
+
   private Predicate<NodeMetadata> buildFilterPredicate(String[] ids, String[] roles, ClusterSpec spec)
     throws IOException {
 
