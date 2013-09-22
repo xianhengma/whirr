@@ -13,6 +13,8 @@ Release 0.9.0 (Unreleased Changes)
 
     WHIRR-721. Improve robustness of volume device detection. (graham)
 
+    WHIRR-375. Allow running one-off commands on all nodes and on nodes with specific roles (Xianheng Ma)
+
   BUG FIXES
 
     WHIRR-732. Fix CDH repo for Ubuntu 12.04. (sebastien goasguen via abayer)
