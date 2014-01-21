@@ -14,15 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+function configure_realtime() {
 
-set -x
+  ZOOKEEPER_QUORUM=$1
+  REALTIME_SPEC=$2
 
-function install_kerberos_server() {
-  if which dpkg &> /dev/null; then
-    export DEBIAN_FRONTEND=noninteractive
-    retry_apt_get update
-    retry_apt_get -q -y install krb5-kdc krb5-admin-server
-  elif which rpm &> /dev/null; then
-    retry_yum install -y krb5-server
-  fi
+  echo "PWD: `pwd`"
+
+  cat > /usr/local/druid-services-0.5.7/config/realtime/realtime.spec << EOF
+${REALTIME_SPEC}
+EOF
 }
